@@ -67,24 +67,32 @@ describe('CreateProduct', () => {
         expect(args).toHaveProperty('id', mockId);
     });
 
-    it('fails when no name is present', async () => {
+    it.todo('fails when stock is negative');
+
+    Object.keys(params).forEach(key => {
         const invalidParams = {
             ...params
         }
 
-        delete invalidParams['name'];
-        const subject = getInstance();
-        try {
+        delete invalidParams[key];
 
-        await subject.execute(invalidParams);
-        }
-        catch(err) {
-            expect(err).toHaveProperty('code', 'ValidationError');
-            expect(err).toHaveProperty('message');
-            return;
-        }
+        it(`fails when no ${key} is present`, async () => {
+            const subject = getInstance();
+            try {
 
-        throw new Error('fail')
+            await subject.execute(invalidParams);
+            }
+            catch(err) {
+                console.log(err);
+                expect(err).toHaveProperty('code', 'ValidationError');
+                expect(err).toHaveProperty('message');
+                return;
+            }
+
+            throw new Error('fail')
+        })
+
     })
+
 
 })

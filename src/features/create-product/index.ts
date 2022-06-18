@@ -1,6 +1,7 @@
 import { IParams } from './params';
 import { IResponse } from './response'
 import { IProductDataSource } from '../../interfaces/data-sources';
+import schema from './schema';
 
 export default class CreateProduct {
 
@@ -11,10 +12,11 @@ export default class CreateProduct {
     }
 
     execute(params: Partial<IParams>) {
-        if(!params.name) {
+        const err = schema.validate(params);
+        if(err.error) {
             throw {
                 code: 'ValidationError',
-                message: 'name is required'
+                message: err.error.details[0].message
             }
         }
 
