@@ -1,0 +1,1 @@
+export { IProductDataSource } from './product';
