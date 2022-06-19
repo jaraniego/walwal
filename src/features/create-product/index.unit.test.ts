@@ -72,7 +72,7 @@ describe('CreateProduct', () => {
     it.todo('fails when stock is not a number');
 
     Object.keys(params).forEach(key => {
-        const invalidParams = {
+        const invalidParams: any = {
             ...params
         }
 
@@ -85,7 +85,6 @@ describe('CreateProduct', () => {
             await subject.execute(invalidParams);
             }
             catch(err) {
-                console.log(err);
                 expect(err).toHaveProperty('code', 'ValidationError');
                 expect(err).toHaveProperty('message');
                 return;

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "migrate": "node_modules/.bin/knex migrate:latest"
   },
   "repository": "git+https://github.com/jaraniego/walwal.git",
   "author": "Jomel Araniego <jomel150@gmail.com>",
