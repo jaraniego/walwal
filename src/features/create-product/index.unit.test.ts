@@ -69,6 +69,8 @@ describe('CreateProduct', () => {
 
     it.todo('fails when stock is negative');
 
+    it.todo('fails when stock is not a number');
+
     Object.keys(params).forEach(key => {
         const invalidParams = {
             ...params

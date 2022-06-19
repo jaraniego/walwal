@@ -14,7 +14,12 @@
   },
   "homepage": "https://github.com/jaraniego/walwal#readme",
   "dependencies": {
+    "@types/config": "^0.0.41",
+    "config": "^3.3.7",
+    "inversify": "^6.0.1",
     "joi": "^17.6.0",
+    "knex": "^2.1.0",
+    "pg": "^8.7.3",
     "ts-node": "^10.8.1"
   },
   "devDependencies": {
