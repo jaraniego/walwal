@@ -1,19 +1,26 @@
 import { Container } from 'inversify';
-import { Knex } from 'knex';
+import Knex from 'knex';
 import config from 'config';
 import Types from '../types';
+import ProductDb from './product-db';
 
-const knex = new Knex({
+const DB_USERNAME: string = config.get('database.username');
+const DB_PASSWORD: string = config.get('database.password');
+const DB_NAME: string = config.get('database.name');
+
+const container = new Container();
+
+const knex = Knex({
     client: 'pg',
     connection: {
-        user: config.get('database.username'),
-        password: config.get('database.password'),
-        name: config.get('database.name'),
+        user: DB_USERNAME,
+        password: DB_PASSWORD,
+        database: DB_NAME
     }
 })
 
+container.bind(Types.ProductDataSource).to(ProductDb);
 container.bind(Types.Knex).toConstantValue(knex);
 
-const container = new Container();
 
 export default container;

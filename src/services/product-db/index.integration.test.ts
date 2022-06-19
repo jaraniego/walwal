@@ -1,26 +1,33 @@
-import container from '..';
+import container from '../../';
 import Types from '../../types';
 import { validateProduct } from '../../../tests/assertions';
+import { Knex } from 'knex';
+import config from 'config';
+import { IProductDataSource } from '../../interfaces/data-sources';
+
+const PRODUCTS_TABLE: string = config.get('database.tables.products');
 
 describe('ProductDb', () => {
 
-    const knex = container.get(Types.Knex);
+    const knex: Knex = container.get(Types.Knex);
 
     describe('#create', () => {
 
         const params = {
-            id: 'id',
             name: 'Wallet',
             price: 100,
             stocks: 10000,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
 
         }
 
+        afterEach(async () => {
+            await knex(PRODUCTS_TABLE).truncate();
+        })
+
         it('returns a new product', async () => {
-            const subject = container.get(Types.ProductDataSource);
+            const subject: IProductDataSource = container.get(Types.ProductDataSource);
             const res = await subject.create(params);
+
             validateProduct(res);
         })
 

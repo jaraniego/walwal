@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { Container } from 'inversify';
 import serviceContainer from './services';
 import featuresContainer from './features';
