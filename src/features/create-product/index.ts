@@ -1,13 +1,17 @@
+import { injectable, inject } from 'inversify';
+import Types from '../../types';
 import { IParams } from './params';
 import { IResponse } from './response'
 import { IProductDataSource } from '../../interfaces/data-sources';
+import { IIdService } from '../../services/id/interface';
 import schema from './schema';
 
+@injectable()
 export default class CreateProduct {
 
     constructor(
-        private productDataSource: Pick<IProductDataSource, 'create'>,
-        private idService: any,
+        @inject(Types.ProductDataSource ) private productDataSource: Pick<IProductDataSource, 'create'>,
+        @inject(Types.IdService) private idService: IIdService,
     ) {
     }
 

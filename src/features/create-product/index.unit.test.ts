@@ -1,4 +1,6 @@
+import 'reflect-metadata';
 import CreateProduct from './';
+import { validateProduct } from '../../../tests/assertions';
 
 describe('CreateProduct', () => {
 
@@ -42,13 +44,11 @@ describe('CreateProduct', () => {
         const subject = getInstance();
 
         const res = await subject.execute(params);
+        validateProduct(res);
 
-        expect(res).toHaveProperty('name', params.name);
-        expect(res).toHaveProperty('price', params.price);
-        expect(res).toHaveProperty('stocks', params.stocks);
-        expect(res).toHaveProperty('id');
-        expect(res).toHaveProperty('createdAt');
-        expect(res).toHaveProperty('updatedAt');
+        expect(res.name).toEqual(params.name);
+        expect(res.price).toEqual(params.price);
+        expect(res.stocks).toEqual(params.stocks);
     });
 
     it('calls ProductDataSource#create', async () => {

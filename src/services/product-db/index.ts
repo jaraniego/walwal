@@ -17,6 +17,10 @@ export default class ProductDb implements IProductDataSource {
 
     }
 
+    async truncate() {
+        return this.knex(PRODUCTS_TABLE).truncate();
+    }
+
     async create(params: Partial<IProduct>) {
         const formattedParams: any = {};
         Object.keys(params).forEach(key => {

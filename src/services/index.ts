@@ -3,6 +3,7 @@ import Knex from 'knex';
 import config from 'config';
 import Types from '../types';
 import ProductDb from './product-db';
+import IdService from './id';
 
 const DB_USERNAME: string = config.get('database.username');
 const DB_PASSWORD: string = config.get('database.password');
@@ -20,6 +21,7 @@ const knex = Knex({
 })
 
 container.bind(Types.ProductDataSource).to(ProductDb);
+container.bind(Types.IdService).to(IdService);
 container.bind(Types.Knex).toConstantValue(knex);
 
 

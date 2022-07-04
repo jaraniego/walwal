@@ -29,8 +29,16 @@ describe('ProductDb', () => {
             const res = await subject.create(params);
 
             validateProduct(res);
-        })
+        });
+
+        it('creates a database record', async () => {
+            const subject: IProductDataSource = container.get(Types.ProductDataSource);
+            await subject.create(params);
+            const res = await knex(PRODUCTS_TABLE).select('*');
+            expect(res.length).toEqual(1);
+        });
+
 
     });
 
-})
+});
